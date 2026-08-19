@@ -67,15 +67,6 @@ func (s DataZone) BusinessDayWindow(at time.Time) (time.Time, time.Time, error) 
 	return start.UTC(), end.UTC(), nil
 }
 
-func (s DataZone) FixedBusinessDayWindow(at time.Time) (time.Time, time.Time, error) {
-	start, _, err := s.BusinessDayWindow(at)
-	if err != nil {
-		return time.Time{}, time.Time{}, err
-	}
-	end := start.Add(24 * time.Hour)
-	return start, end, nil
-}
-
 func (s DataZone) IsOpen() bool { return s.Status == DataZoneActive }
 
 func (s DataZone) IsSuspended() bool { return s.Status == DataZoneSuspended }
